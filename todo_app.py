@@ -11,7 +11,42 @@ def add_todo(todo_list_data, todo):
     return todo_list_data
 
 
+def get_todo(todo_list_data, todo_title):
+    todo = None
+    for todo_instance in todo_list_data:
+        if todo_instance['title'] == todo_title:
+            todo = todo_instance
+            break
+
+    return todo
+
+
+def update_todo(todo_list_data, todo_title, updates):
+    todo = get_todo(todo_list_data, todo_title)
+
+    if todo is None:
+        raise ValueError(f"A todo with title: {todo_title} doesn't appear to be on your list.")
+
+    todo.update(updates)
+
+    return todo_list_data
+
+
+def remove_todo(todo_list_data, todo_title):
+    todo = get_todo(todo_list_data, todo_title)
+
+    if todo is None:
+        raise ValueError(f"A todo with this title: {todo_title} doesn't appear to be on your list.")
+    if not todo['status']:
+        raise ValueError(f'Task: {todo_title} seems not to be done, change the status to True to remove it.')
+
+    todo_list_data.remove(todo)
+
+    return todo_list_data
+
+
 new_todos = todo_list()
-new_todos(add_todo, todo={'name': 'Read a book', 'description': 'Just sit down and read', 'duration': 20, 'status': False})
-new_todos(add_todo, todo={'name': 'Buy groceries', 'description': 'Go to store and buy stuff', 'duration': 30, 'status': False})
-print(new_todos(add_todo, todo={'name': 'Meditate', 'description': '', 'duration': 10, 'status': True}))
+new_todos(add_todo, todo={'title': 'Read a book', 'description': 'Just sit down and read', 'duration': 20, 'status': False})
+new_todos(add_todo, todo={'title': 'Buy groceries', 'description': 'Go to store and buy stuff', 'duration': 30, 'status': False})
+print(new_todos(add_todo, todo={'title': 'Meditate', 'description': '', 'duration': 10, 'status': True}))
+print(new_todos(update_todo, todo_title='Meditate', updates={'status': False}))
