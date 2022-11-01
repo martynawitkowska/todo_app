@@ -35,6 +35,11 @@ def update_todo(todo_list_data, todo_title, updates):
     return todo_list_data
 
 
+def mark_todo_as_done(todo_list_data, todo_title):
+    update_todo(todo_list_data, todo_title, updates={'status': True})
+    return f"Todo: {todo_title} is done!"
+
+
 def remove_todo(todo_list_data, todo_title):
     todo = get_todo(todo_list_data, todo_title)
 

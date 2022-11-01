@@ -7,4 +7,5 @@ new_todos(add_todo, todo={'title': 'Start using brain', 'description': 'Just use
 new_todos(add_todo, todo={'title': 'Some task to do', 'description': 'Some description', 'duration': 30, 'status': False})
 new_todos(add_todo, todo={'title': 'Some other task to do', 'description': 'Some other description', 'duration': 30, 'status': True})
 # new_todos(update_todo, todo_title='Read a book', updates={'status': True})
+pp(new_todos(mark_todo_as_done, todo_title='Read a book'))
 pp(new_todos(remove_all_done_todos))
